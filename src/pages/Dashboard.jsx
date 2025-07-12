@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (chartInstance.current) {
-      chartInstance.current.destroy(); // 👈 destroy previous chart before creating new one
+      chartInstance.current.destroy();
     }
 
     const ctx = chartRef.current.getContext('2d');
