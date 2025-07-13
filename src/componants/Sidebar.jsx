@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   FaUserCircle, FaBullhorn, FaUpload, FaPhone, FaBan,
-  FaCheckCircle, FaWallet, FaEnvelope, FaCog, FaSignOutAlt, FaBars
+  FaCheckCircle, FaWallet, FaEnvelope, FaCog, FaSignOutAlt, FaBars,
+  FaHome,
+  FaPowerOff
 } from 'react-icons/fa';
 
 const Sidebar = () => {
@@ -18,19 +20,13 @@ const Sidebar = () => {
         isOpen 
       }`}
     >
-      {/* Logo + Toggle */}
+      
       <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-white">
         <div className="flex items-center gap-3">
-          {isOpen && (
-            <img
-              src="https://via.placeholder.com/40"
-              alt="Aptivion Logo"
-              className="h-8 w-8 rounded-full"
-            />
-          )}
+          
           {isOpen && (
             <span className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              Aptivion Tech
+              Aptivion Tech.
             </span>
           )}
         </div>
@@ -44,15 +40,16 @@ const Sidebar = () => {
 
       {/* Navigation */}
       <nav className="flex flex-col p-3 space-y-1 mt-4">
+        <NavItem to="/" icon={<FaHome />} label="Dashboard" isOpen={isOpen} />
         <NavItem to="/account" icon={<FaUserCircle />} label="My Account" isOpen={isOpen} />
         <NavItem to="/createcampaign" icon={<FaBullhorn />} label="Create Campaign" isOpen={isOpen} />
         <NavItem to="/uploaddatabase" icon={<FaUpload />} label="Upload DB" isOpen={isOpen} />
-        <NavItem to="/calls" icon={<FaPhone />} label="Call Recordings" isOpen={isOpen} />
-        <NavItem to="/black" icon={<FaBan />} label="Blacklist" isOpen={isOpen} />
-        <NavItem to="/white" icon={<FaCheckCircle />} label="Whitelist" isOpen={isOpen} />
+        <NavItem to="/callrecordings" icon={<FaPhone />} label="Call Recordings" isOpen={isOpen} />
+        <NavItem to="/blacklist" icon={<FaBan />} label="Blacklist" isOpen={isOpen} />
+        <NavItem to="/whitelist" icon={<FaCheckCircle />} label="Whitelist" isOpen={isOpen} />
         <NavItem to="/wallet" icon={<FaWallet />} label="Wallet" isOpen={isOpen} />
         <NavItem to="/contact" icon={<FaEnvelope />} label="Contact" isOpen={isOpen} />
-        <NavItem to="/settings" icon={<FaCog />} label="Settings" isOpen={isOpen} />
+        <NavItem to="/setting" icon={<FaCog />} label="Settings" isOpen={isOpen} />
         <NavItem
           to="/logout"
           icon={<FaSignOutAlt />}
