@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 
+// Sample CSV content
+const sampleCsvContent = `name,number
+John Doe,1234567890`;
+
+const sampleCsvUrl = `data:text/csv;charset=utf-8,${encodeURIComponent(sampleCsvContent)}`;
+
 const UploadDatabase = () => {
   const [formData, setFormData] = useState({
     file: null,
@@ -19,7 +25,6 @@ const UploadDatabase = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
     console.log('Form submitted:', formData);
   };
 
@@ -42,11 +47,21 @@ const UploadDatabase = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Main Content */}
       <main className="flex-1 p-6 lg:p-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Upload Database</h1>
         <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Upload Your Database File</h2>
+          <p className="text-sm text-gray-600 mb-4">
+            Download a{' '}
+            <a
+              href={sampleCsvUrl}
+              download="sample_database.csv"
+              className="text-blue-600 hover:underline"
+            >
+              sample CSV file
+            </a>{' '}
+            (format: name, number)
+          </p>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div
               className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${

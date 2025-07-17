@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 import {
   FaUserCircle, FaBullhorn, FaUpload, FaPhone, FaBan,
   FaCheckCircle, FaWallet, FaEnvelope, FaCog, FaSignOutAlt, FaBars,
-  FaHome,
-  FaPowerOff
+  FaHome,FaUserSecret
 } from 'react-icons/fa';
 
 const Sidebar = () => {
@@ -43,11 +42,12 @@ const Sidebar = () => {
         <NavItem to="/" icon={<FaHome />} label="Dashboard" isOpen={isOpen} />
         <NavItem to="/account" icon={<FaUserCircle />} label="My Account" isOpen={isOpen} />
         <NavItem to="/createcampaign" icon={<FaBullhorn />} label="Create Campaign" isOpen={isOpen} />
-        <NavItem to="/uploaddatabase" icon={<FaUpload />} label="Upload DB" isOpen={isOpen} />
+        <NavItem to="/uploaddatabase" icon={<FaUpload />} label="Upload Database" isOpen={isOpen} />
         <NavItem to="/callrecordings" icon={<FaPhone />} label="Call Recordings" isOpen={isOpen} />
         <NavItem to="/blacklist" icon={<FaBan />} label="Blacklist" isOpen={isOpen} />
         <NavItem to="/whitelist" icon={<FaCheckCircle />} label="Whitelist" isOpen={isOpen} />
         <NavItem to="/wallet" icon={<FaWallet />} label="Wallet" isOpen={isOpen} />
+        <NavItem to="/addagent" icon={<FaUserSecret />} label="Add Agent" isOpen={isOpen} />
         <NavItem to="/contact" icon={<FaEnvelope />} label="Contact" isOpen={isOpen} />
         <NavItem to="/setting" icon={<FaCog />} label="Settings" isOpen={isOpen} />
         <NavItem
