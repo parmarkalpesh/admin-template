@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 
 const Blacklist = () => {
-  const [blacklistData, setBlacklistData] = useState([
-    { phoneNumber: '+91 9999988888', label: 'Spam Caller', addedOn: '2024-06-02' },
-    { phoneNumber: '+91 8888877777', label: 'Telemarketer', addedOn: '2024-05-30' },
-  ]);
+  const [blacklistData, setBlacklistData] = useState([]);
   const [formData, setFormData] = useState({
     phoneNumber: '',
     label: '',
@@ -38,7 +35,6 @@ const Blacklist = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Main Content */}
       <main className="flex-1 p-6 lg:p-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Blacklist Numbers</h1>
         <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
@@ -62,30 +58,38 @@ const Blacklist = () => {
                 </tr>
               </thead>
               <tbody>
-                {blacklistData.map((entry, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-gray-200 hover:bg-gray-50 transition-all duration-200"
-                  >
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.phoneNumber}</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.label}</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.addedOn}</td>
-                    <td className="px-4 py-3 flex gap-2">
-                      <button
-                        className="p-2 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                        onClick={() => console.log(`Editing ${entry.phoneNumber}`)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        className="p-2 text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
-                        onClick={() => handleDelete(index)}
-                      >
-                        <FaTrash />
-                      </button>
+                {blacklistData.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="px-4 py-3 text-sm text-gray-700 text-center">
+                      No numbers added to blacklist yet.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  blacklistData.map((entry, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-200 hover:bg-gray-50 transition-all duration-200"
+                    >
+                      <td className="px-4 py-3 text-sm text-gray-700">{entry.phoneNumber}</td>
+                      <td className="px-4 py-3 text-sm text-gray-700">{entry.label}</td>
+                      <td className="px-4 py-3 text-sm text-gray-700">{entry.addedOn}</td>
+                      <td className="px-4 py-3 flex gap-2">
+                        <button
+                          className="p-2 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                          onClick={() => console.log(`Editing ${entry.phoneNumber}`)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="p-2 text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
+                          onClick={() => handleDelete(index)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -136,7 +140,7 @@ const Blacklist = () => {
         </div>
       </main>
     </div>
-    );
+  );
 };
 
 export default Blacklist;
