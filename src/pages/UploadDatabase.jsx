@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUpload } from 'react-icons/fa';
+import { FaUpload, FaDownload } from 'react-icons/fa';
 
 // Sample CSV content
 const sampleCsvContent = `name,number
@@ -46,26 +46,27 @@ const UploadDatabase = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <main className="flex-1 p-6 lg:p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Upload Database</h1>
-        <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Upload Your Database File</h2>
-          <p className="text-sm text-gray-600 mb-4">
-            Download a{' '}
+    <div className="flex min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <main className="flex-1 p-6 lg:p-12">
+        <h1 className="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">Upload Database</h1>
+        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upload Your Database File</h2>
+          <div className="flex items-center gap-4 mb-6">
+            <p className="text-sm text-gray-600">
+              Download a sample CSV file (format: name, number)
+            </p>
             <a
               href={sampleCsvUrl}
               download="sample_database.csv"
-              className="text-blue-600 hover:underline"
+              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-lg shadow-md hover:from-green-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 transform hover:scale-105"
             >
-              sample CSV file
-            </a>{' '}
-            (format: name, number)
-          </p>
+              <FaDownload className="mr-2 text-sm" /> Download Sample
+            </a>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div
-              className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${
-                isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-gray-50'
+              className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-300 ${
+                isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 bg-gray-50'
               }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -86,8 +87,8 @@ const UploadDatabase = () => {
                     onChange={handleInputChange}
                     className="hidden"
                   />
-                  <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
-                    <FaUpload className="mr-2" /> Browse File
+                  <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 transform hover:scale-105">
+                    <FaUpload className="mr-2 text-sm" /> Browse File
                   </span>
                 </label>
               </div>
@@ -98,14 +99,14 @@ const UploadDatabase = () => {
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                rows="4"
+                className="mt-1 w-full px-4 py-2.5 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 text-gray-700"
+                rows="5"
                 placeholder="Enter description"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              className="w-full py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 transform hover:scale-105"
             >
               Upload
             </button>
