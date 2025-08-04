@@ -15,59 +15,62 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
     console.log('Form submitted:', formData);
     setFormData({ username: '', email: '', password: '', notificationPreferences: '' });
   };
 
+  const handleCancel = () => {
+    setFormData({ username: '', email: '', password: '', notificationPreferences: '' });
+  };
+
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Main Content */}
-      <main className="flex-1 p-6 lg:p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Settings</h1>
-        <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Profile Settings</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="h-screen w-full bg-gradient-to-br from-blue-100 via-white to-indigo-100 overflow-x-hidden">
+      <div className="min-h-full w-full max-w-screen-xl mx-auto bg-white shadow-xl p-6 sm:p-10">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Settings</h1>
+        <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-600">Username</label>
+              <label className="block text-sm font-medium text-gray-700">Username</label>
               <input
                 type="text"
                 name="username"
                 value={formData.username}
                 onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="Enter your username"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-600">Email</label>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="Enter your email"
               />
             </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-600">Change Password</label>
+              <label className="block text-sm font-medium text-gray-700">Change Password</label>
               <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 placeholder="Enter new password"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-600">Notification Preferences</label>
+              <label className="block text-sm font-medium text-gray-700">Notification Preferences</label>
               <select
                 name="notificationPreferences"
                 value={formData.notificationPreferences}
                 onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
               >
                 <option value="" disabled>
                   Select notification preference
@@ -77,15 +80,24 @@ const Settings = () => {
                 <option value="No Notifications">No Notifications</option>
               </select>
             </div>
+          </div>
+          <div className="flex justify-end gap-4 pt-6">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-6 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
+            >
+              Cancel
+            </button>
             <button
               type="submit"
-              className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
             >
               Save Changes
             </button>
-          </form>
-        </div>
-      </main>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

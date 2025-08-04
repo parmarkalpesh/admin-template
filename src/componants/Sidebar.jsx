@@ -25,7 +25,7 @@ const Sidebar = () => {
           
           {isOpen && (
             <span className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-              Aptivion Tech.
+              Aptivison Tech.
             </span>
           )}
         </div>

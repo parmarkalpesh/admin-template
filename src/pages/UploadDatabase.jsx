@@ -45,74 +45,84 @@ const UploadDatabase = () => {
     setFormData((prev) => ({ ...prev, file }));
   };
 
+  const handleCancel = () => {
+    setFormData({ file: null, description: '' });
+  };
+
   return (
-    <div className="flex min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <main className="flex-1 p-6 lg:p-12">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">Upload Database</h1>
-        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upload Your Database File</h2>
+    <div className="h-screen w-full bg-gradient-to-br from-blue-100 via-white to-indigo-100 overflow-x-hidden">
+      <div className="min-h-full w-full max-w-screen-xl mx-auto bg-white shadow-xl p-6 sm:p-10">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Upload Database</h1>
+        <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex items-center gap-4 mb-6">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-700">
               Download a sample CSV file (format: name, number)
             </p>
             <a
               href={sampleCsvUrl}
               download="sample_database.csv"
-              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-lg shadow-md hover:from-green-600 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 transform hover:scale-105"
+              className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             >
               <FaDownload className="mr-2 text-sm" /> Download Sample
             </a>
           </div>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div
-              className={`border-2 border-dashed rounded-lg p-6 text-center transition-all duration-300 ${
-                isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-200 bg-gray-50'
-              }`}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-            >
-              <label className="block text-sm font-medium text-gray-600 mb-3">
-                Select file to upload
+          <div
+            className={`border-2 border-dashed rounded-md p-6 text-center transition-all duration-300 ${
+              isDragging ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 bg-white'
+            }`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+          >
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              Select file to upload
+            </label>
+            <div className="flex flex-col items-center gap-3">
+              <FaUpload className="text-2xl text-gray-500" />
+              <p className="text-sm text-gray-500">
+                {formData.file ? formData.file.name : 'Drag and drop your file here or click to browse'}
+              </p>
+              <label className="cursor-pointer">
+                <input
+                  type="file"
+                  name="file"
+                  onChange={handleInputChange}
+                  className="hidden"
+                />
+                <span className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+                  <FaUpload className="mr-2 text-sm" /> Browse File
+                </span>
               </label>
-              <div className="flex flex-col items-center gap-3">
-                <FaUpload className="text-2xl text-gray-500" />
-                <p className="text-sm text-gray-500">
-                  {formData.file ? formData.file.name : 'Drag and drop your file here or click to browse'}
-                </p>
-                <label className="cursor-pointer">
-                  <input
-                    type="file"
-                    name="file"
-                    onChange={handleInputChange}
-                    className="hidden"
-                  />
-                  <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 transform hover:scale-105">
-                    <FaUpload className="mr-2 text-sm" /> Browse File
-                  </span>
-                </label>
-              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600">Description (optional)</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                className="mt-1 w-full px-4 py-2.5 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 text-gray-700"
-                rows="5"
-                placeholder="Enter description"
-              ></textarea>
-            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Description (optional)</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              rows="4"
+              placeholder="Enter description"
+            ></textarea>
+          </div>
+          <div className="flex justify-end gap-4 pt-6">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-6 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
+            >
+              Cancel
+            </button>
             <button
               type="submit"
-              className="w-full py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300 transform hover:scale-105"
+              className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
             >
               Upload
             </button>
-          </form>
-        </div>
-      </main>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

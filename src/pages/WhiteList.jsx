@@ -37,95 +37,102 @@ const Whitelist = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Main Content */}
-      <main className="flex-1 p-6 lg:p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Whitelist Numbers</h1>
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-gray-700">Manage Whitelist Numbers</h2>
+    <div className="h-screen w-full bg-gradient-to-br from-blue-100 via-white to-indigo-100 overflow-x-hidden">
+      <div className="min-h-full w-full max-w-screen-xl mx-auto bg-white shadow-xl p-6 sm:p-10">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Whitelist Numbers</h1>
+        <div className="space-y-6 w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-semibold text-gray-700">Manage Whitelist Numbers</h2>
             <button
               onClick={() => setIsFormVisible(true)}
-              className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+              className="inline-flex items-center px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
             >
               Add Number
             </button>
           </div>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto rounded-md border border-gray-300">
             <table className="w-full table-auto border-collapse">
               <thead>
-                <tr className="bg-gray-100">
-                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Phone Number</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Label</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Added On</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Actions</th>
+                <tr className="bg-gray-50">
+                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Phone Number</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Label</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Added On</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-700">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {whitelistData.map((entry, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-gray-200 hover:bg-gray-50 transition-all duration-200"
-                  >
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.phoneNumber}</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.label}</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">{entry.addedOn}</td>
-                    <td className="px-4 py-3 flex gap-2">
-                      <button
-                        className="p-2 text-blue-600 hover:text-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                        onClick={() => console.log(`Editing ${entry.phoneNumber}`)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        className="p-2 text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
-                        onClick={() => handleDelete(index)}
-                      >
-                        <FaTrash />
-                      </button>
+                {whitelistData.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="px-6 py-4 text-sm text-gray-700 text-center font-medium">
+                      No numbers added to whitelist yet.
                     </td>
                   </tr>
-                ))}
+                ) : (
+                  whitelistData.map((entry, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-300 hover:bg-gray-50 transition"
+                    >
+                      <td className="px-6 py-4 text-sm text-gray-700 font-medium">{entry.phoneNumber}</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">{entry.label}</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">{entry.addedOn}</td>
+                      <td className="px-6 py-4 flex gap-2">
+                        <button
+                          className="p-2 text-indigo-600 hover:text-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                          onClick={() => console.log(`Editing ${entry.phoneNumber}`)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="p-2 text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
+                          onClick={() => handleDelete(index)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
           {isFormVisible && (
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-gray-700 mb-4">Add Whitelist Number</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Phone Number</label>
+                  <label className="block text-sm font-medium text-gray-700">Phone Number</label>
                   <input
                     type="tel"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                    className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     placeholder="Enter phone number"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-600">Label</label>
+                  <label className="block text-sm font-medium text-gray-700">Label</label>
                   <input
                     type="text"
                     name="label"
                     value={formData.label}
                     onChange={handleInputChange}
-                    className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                    className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     placeholder="Enter label (e.g., Office)"
                   />
                 </div>
-                <div className="flex gap-4">
+                <div className="flex justify-end gap-4 pt-6">
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="w-full py-2.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all duration-200"
+                    className="px-6 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                    className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
                   >
                     Add
                   </button>
@@ -134,7 +141,7 @@ const Whitelist = () => {
             </div>
           )}
         </div>
-      </main>
+      </div>
     </div>
   );
 };
